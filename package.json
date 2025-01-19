@@ -2,6 +2,9 @@
     "name": "conversor-unidades",
     "version": "1.0.0",
     "scripts": {
-      "build": "cp -r ./src ./build"
+        "build": "cp -r ./src ./build"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7"
     }
-  }
+}
