@@ -1,0 +1,7 @@
+{
+    "name": "conversor-unidades",
+    "version": "1.0.0",
+    "scripts": {
+      "build": "cp -r ./src ./build"
+    }
+  }
