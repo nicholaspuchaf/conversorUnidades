@@ -25,6 +25,10 @@ function zjjsahoudha() {
             gerarMedidasArea();
         });
 
+        $("#espacoVelocidade").load("velocidade.html", () => {
+            gerarMedidasVelocidade();
+        });
+
     };
 
 
@@ -40,8 +44,6 @@ function zjjsahoudha() {
         }).then(response => response.json()).then(data => {
             
             info = {}
-
-            console.log(data)
 
             rates = data['rates']
 
@@ -437,7 +439,7 @@ function zjjsahoudha() {
 
             if(resultado+"" == "NaN")
                 return;
-            $("#resultadoMedidaArea").text(resultado.toFixed(2));
+            $("#resultadoArea").text(resultado.toFixed(5));
         }
 
 
@@ -448,7 +450,60 @@ function zjjsahoudha() {
 
     };
 
+    const gerarMedidasVelocidade = () =>{
 
+        listaVelocidade = {
+            "m/s": 1,
+            "km/s": 0.001,
+            "km/h": 3.6,
+            "cm/s": 100,
+            "mm/s": 1000,
+            "mi/h (milhas por hora)": 2.23694,
+            "ft/s (pés por segundo)": 3.28084,
+            "in/s (polegadas por segundo)": 39.3701,
+            "nós (knot)": 1.94384,
+            "c (velocidade da luz no vácuo)": 299792458,
+            "Mach (ao nível do mar, 20°C)": 340.29
+        }
+        
+
+        Object.entries(listaVelocidade).forEach(([key,value]) => {
+            option1 = $("<option>", {
+                value:value,
+                text:key
+            });
+            option2 = $("<option>", {
+                value:value,
+                text:key
+            });
+
+            $("#listaMedidasVelocidade").append(option1);
+            $("#listaMedidasVelocidadeFim").append(option2);
+        })
+
+        function resultadoVelocidade() {
+
+            valor1 = parseFloat($("#quantidadeEntradaVelocidade").val());
+
+            opcao1 = parseFloat($("#listaMedidasVelocidade").val());
+            opcao2 = parseFloat($("#listaMedidasVelocidadeFim").val());
+
+            resultado = opcao1 / opcao2;
+            resultado = resultado * valor1;
+
+            console.log(resultado)
+            if(resultado+"" == "NaN")
+                return;
+            $("#resultadoVelocidade").text(resultado.toFixed(4));
+            
+        }
+
+
+        $("#listaMedidasVelocidade").change(resultadoVelocidade);
+        $("#listaMedidasVelocidadeFim").change(resultadoVelocidade);
+        $("#quantidadeEntradeVelocidade").change(resultadoVelocidade);
+
+    };
 
     carregarDivs();
 
