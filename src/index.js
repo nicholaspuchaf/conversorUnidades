@@ -21,6 +21,10 @@ function zjjsahoudha() {
             gerarMedidasVolume();
         });
 
+        $("#espacoArea").load("area.html", ()=>{
+            gerarMedidasArea();
+        });
+
     };
 
 
@@ -374,6 +378,76 @@ function zjjsahoudha() {
         $("#quantidadeEntradaVolume").change(resultadoVolume);
 
     };
+
+    const gerarMedidasArea = () => {
+
+        listaDeMedidas = {
+            "Metro quadrado (m²)": 1,
+            "Kilômetro quadrado (km²)": 1000000,
+            "Hectare (ha)": 10000,
+            "Decâmetro quadrado (dam²)": 100,
+            "Centímetro quadrado (cm²)": 0.0001,
+            "Milímetro quadrado (mm²)": 0.000001,
+            "Acre (ac)": 4046.86,
+            "Jarda quadrada (yd²)": 0.836127,
+            "Pé quadrado (ft²)": 0.092903,
+            "Polegada quadrada (in²)": 0.00064516,
+            "Are (a)": 100,
+            "Milha quadrada (mi²)": 2589988.11,
+            "Rod quadrado": 25.2929,
+            "Rood": 1011.714,
+            "Perche": 34.188,
+            "Pole (britânico)": 25.2929,
+            "Furlong quadrado": 40468.6,
+            "Chain quadrado": 404.686,
+            "Acre (britânico, imperial)": 4046.856,
+            "Perch quadrado": 25.29285264,
+            "Alqueire Paulista": 24200,
+            "Alqueire Mineiro": 48400,
+            "Alqueire Baiano": 96800,
+            "Alqueire Goiano": 48400
+        };
+
+
+
+        Object.entries(listaDeMedidas).forEach(([key,value]) => {
+            option1 = $("<option>", {
+                value:value,
+                text:key
+            });
+            option2 = $("<option>", {
+                value:value,
+                text:key
+            });
+
+            $("#listaMedidasArea").append(option1);
+            $("#listaMedidasAreaFim").append(option2);
+        })
+
+        function resultadoArea() {
+
+            valor1 = parseFloat($("#quantidadeEntradaArea").val());
+
+            opcao1 = parseFloat($("#listaMedidasArea").val());
+            opcao2 = parseFloat($("#listaMedidasAreaFim").val());
+
+            resultado = opcao1 / opcao2;
+            resultado = resultado * valor1;
+
+
+            if(resultado+"" == "NaN")
+                return;
+            $("#resultadoMedidaArea").text(resultado.toFixed(2));
+        }
+
+
+        $("#listaMedidasArea").change(resultadoArea);
+        $("#listaMedidasAreaFim").change(resultadoArea);
+        $("#quantidadeEntradaArea").change(resultadoArea);
+
+
+    };
+
 
 
     carregarDivs();
