@@ -29,6 +29,8 @@ function zjjsahoudha() {
             gerarMedidasVelocidade();
         });
 
+        $("#textoDescritivo").load("texto.html");
+
     };
 
 
